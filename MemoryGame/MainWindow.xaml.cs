@@ -24,6 +24,11 @@ namespace MemoryGame
 
         private void UjJatek()
         {
+            if (idozito != null)
+            {
+                idozito.Stop();
+            }
+
             kartyaSzamok = new List<int>
             {
                 1, 1,
