@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows;
+﻿using System.Windows.Controls.Primitives;
 using System.Windows.Controls;
 using System.Windows.Threading;
+using System.Windows;
 
 namespace MemoryGame
 {
@@ -15,6 +13,8 @@ namespace MemoryGame
         private DispatcherTimer idozito;
         private int elteltIdo;
         private int megtalaltParok;
+        private int oszlopok = 2;
+        private int sorok = 2;
 
         public MainWindow()
         {
@@ -29,17 +29,12 @@ namespace MemoryGame
                 idozito.Stop();
             }
 
-            kartyaSzamok = new List<int>
+            kartyaSzamok = new List<int>();
+            for (int i = 1; i <= (oszlopok * sorok) / 2; i++)
             {
-                1, 1,
-                2, 2,
-                3, 3,
-                4, 4,
-                5, 5,
-                6, 6,
-                7, 7,
-                8, 8
-            };
+                kartyaSzamok.Add(i);
+                kartyaSzamok.Add(i);
+            }
 
             KartyakKeverese();
             KartyakLetrehozasa();
@@ -56,6 +51,10 @@ namespace MemoryGame
         {
             gombok = new List<Button>();
             CardGrid.Children.Clear();
+
+            UniformGrid grid = CardGrid;
+            grid.Rows = sorok;
+            grid.Columns = oszlopok;
 
             for (int i = 0; i < kartyaSzamok.Count; i++)
             {
@@ -101,6 +100,8 @@ namespace MemoryGame
                 {
                     idozito.Stop();
                     MessageBox.Show($"Gratulálok! A játék véget ért. Idő: {elteltIdo} másodperc.");
+                    megtalaltParok = 0;
+                    UjJatek();
                 }
             }
             else
@@ -132,6 +133,20 @@ namespace MemoryGame
 
         private void NewGameButton_Click(object sender, RoutedEventArgs e)
         {
+            UjJatek();
+        }
+
+        private void TwoByTwoButton_Click(object sender, RoutedEventArgs e)
+        {
+            oszlopok = 2;
+            sorok = 2;
+            UjJatek();
+        }
+
+        private void FourByFourButton_Click(object sender, RoutedEventArgs e)
+        {
+            oszlopok = 4;
+            sorok = 4;
             UjJatek();
         }
     }
