@@ -24,6 +24,7 @@ namespace MemoryGame
 
         private void UjJatek()
         {
+            megtalaltParok = 0;
             if (idozito != null)
             {
                 idozito.Stop();
@@ -100,7 +101,6 @@ namespace MemoryGame
                 {
                     idozito.Stop();
                     MessageBox.Show($"Gratulálok! A játék véget ért. Idő: {elteltIdo} másodperc.");
-                    megtalaltParok = 0;
                     UjJatek();
                 }
             }
